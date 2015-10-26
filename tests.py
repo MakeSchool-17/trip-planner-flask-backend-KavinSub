@@ -62,6 +62,10 @@ class FlaskrTestCase(unittest.TestCase):
       response = self.app.get('/myobject/55f0cbb4236f44b7f0e3cb23')
       self.assertEqual(response.status_code, 404)
 
+    #[Ben-G] TODO: I'm assuming you're in the middle of debugging here,
+    # but it's best not to commit commented out code
+
+
     # def test_creating_trip(self):
     #     trip = {'user':'Kav', 'waypoints':[('Golden Gate Bridge', 23.57, 40.1),('Eiffel Tower', 13.1, 90.8)]}
     #     response = self.app.post('/trips/', data = json.dumps(trip), content_type = 'application/json')
@@ -199,6 +203,8 @@ class FlaskrTestCase(unittest.TestCase):
 
         # First create user and trip
         self.app.post('/users/', data = json.dumps(user), content_type = 'application/json')
+        #[Ben-G] TODO: Would recommend some line breaks here to keep the lines a little shorter (e.g. < 120 characters)
+        #[Ben-G] TODO: Also prefarable to break this intp multiple operations with intermediate results
         trip_JSON = json.loads(self.app.post('/trips/', headers = self.generate_auth_header(user['user'], user['pass']), data=json.dumps(trip), content_type='application/json').data.decode())
         # Associate trip with user
         user['trips'].append(trip_JSON['_id'])
@@ -207,9 +213,10 @@ class FlaskrTestCase(unittest.TestCase):
         get_response = self.app.get('/users/' + user['user'], headers = self.generate_auth_header(user['user'], user['pass']))
         tripsJSON = json.loads(get_response.data.decode())
 
+        #[Ben-G] TODO: Some duplicate code here
         self.assertEqual(put_response.status_code, 200)
         self.assertEqual(put_response.status_code, 200)
         #print(tripsJSON)
-        
+
 if __name__ == '__main__':
     unittest.main()

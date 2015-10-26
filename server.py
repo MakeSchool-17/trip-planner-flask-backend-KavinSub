@@ -165,9 +165,12 @@ class Verify(Resource):
             return ({'error': 'Incorrect password.'}, 401, None)
 
 # Add REST resource to API
+#[Ben-G] TODO: You can remove this example endpoint, it's no longer needed
 api.add_resource(MyObject, '/myobject/','/myobject/<string:myobject_id>')
 api.add_resource(Trip, '/trips/','/trips/<string:trip_id>')
 api.add_resource(User, '/users/','/users/<string:name>')
+#[Ben-G] TODO: There shouldn't be a separate endpoint for user auth - you can use th existing user
+# endpoint and its GET method
 api.add_resource(Verify, '/verify/')
 
 # provide a custom JSON serializer for flaks_restful
